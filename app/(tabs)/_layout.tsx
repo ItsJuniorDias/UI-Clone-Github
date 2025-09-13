@@ -1,11 +1,12 @@
 import { Tabs } from "expo-router";
 import React from "react";
+import { BlurView } from "expo-blur";
 
 import { Colors } from "@/constants/theme";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 export default function TabLayout() {
   return (
@@ -13,10 +14,12 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors.light.tint,
         headerShown: false,
+        tabBarStyle: {
+          position: "absolute",
+          backgroundColor: "transparent",
+        },
         tabBarBackground: () => (
-          <View
-            style={{ flex: 1, backgroundColor: Colors.light.tabBarBackground }}
-          />
+          <BlurView tint="dark" intensity={80} style={{ flex: 1 }} />
         ),
       }}
     >
@@ -28,35 +31,21 @@ export default function TabLayout() {
           headerTitle: "Home",
           headerTitleAlign: "center",
           headerTintColor: "white",
-          headerBackground: () => (
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: Colors.light.background,
-              }}
-            />
-          ),
+          headerBackground: () => <View style={styles.container} />,
           tabBarIcon: ({ color }) => (
             <Ionicons name="home-outline" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="repositories"
         options={{
-          title: "Explore",
+          title: "Repositories",
           headerShown: true,
-          headerTitle: "Explore",
+          headerTitle: "Repositories",
           headerTitleAlign: "center",
           headerTintColor: "white",
-          headerBackground: () => (
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: Colors.light.background,
-              }}
-            />
-          ),
+          headerBackground: () => <View style={styles.container} />,
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="explore" size={24} color={color} />
           ),
@@ -65,3 +54,10 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.light.background,
+  },
+});
