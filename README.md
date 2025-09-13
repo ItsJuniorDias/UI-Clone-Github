@@ -6,7 +6,7 @@
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## UI-Clone-Github
-:octocat: UI Github clone built in react native with expo sdk 53
+:octocat: UI Github clone built in react native with expo sdk 54
 
 ## Get started
 
