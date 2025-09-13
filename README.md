@@ -1,2 +1,2 @@
 # UI-Clone-Github
-:octocat: UI Clone do Github construído em react nativo com expo sdk 53
+:octocat: UI Github clone built in react native with expo sdk 53
