@@ -2,10 +2,17 @@ import { Colors } from '@/constants/theme';
 import { Tag, Text } from '..';
 import { Container, ContentText, Row, RowTag } from './styles';
 import Octicons from '@expo/vector-icons/Octicons';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
-import { ItemProps } from '@/app/(app)/repositories/issues';
-import { scale } from '@/constants/scale';
+import { LabelsProps } from '@/app/(app)/repositories/issues';
+
+export type ItemProps = {
+  id: number;
+  title: string;
+  username: string;
+  labels: LabelsProps[];
+  created_at: string;
+};
 
 export default function CardIssue({
   title,
@@ -62,7 +69,11 @@ export default function CardIssue({
         nestedScrollEnabled={true}
       >
         {labels.map((item) => (
-          <Tag title={item.name} backgroundColor={`#${item.color}`} />
+          <Tag
+            key={item.id || item.name}
+            title={item.name}
+            backgroundColor={`#${item.color}`}
+          />
         ))}
       </RowTag>
     </Container>

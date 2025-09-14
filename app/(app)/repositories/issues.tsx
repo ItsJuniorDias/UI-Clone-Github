@@ -5,7 +5,7 @@ import { api } from '@/services/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useLocalSearchParams } from 'expo-router';
 
-type LabelsProps = {
+export type LabelsProps = {
   id: number;
   node_id: string;
   url: string;
@@ -18,6 +18,7 @@ type LabelsProps = {
 export type ItemProps = {
   id: number;
   title: string;
+  username: string;
   labels: LabelsProps[];
   user: { login: string };
   created_at: string;
