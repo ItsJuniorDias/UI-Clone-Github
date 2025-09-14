@@ -11,6 +11,7 @@ interface BodyIssueProps {
   title: string;
   numberIssue?: number;
   color: string;
+  onPress?: () => void;
 }
 
 export default function BodyIssue({
@@ -18,9 +19,10 @@ export default function BodyIssue({
   title,
   numberIssue,
   color,
+  onPress,
 }: BodyIssueProps) {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Row>
         <Icon color={color}>{icon()}</Icon>
 

@@ -10,8 +10,10 @@ export const Container = styled.ScrollView`
 `;
 
 export const ContentHeader = styled.View`
+  width: 95%;
   padding: ${scale.md};
   margin-bottom: ${scale.sm};
+ 
 `;
 
 export const Row = styled.View`

@@ -8,7 +8,7 @@ import { Colors } from '@/constants/theme';
 
 import { GITHUB_TOKEN } from '@env';
 
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 
 import {
   Container,
@@ -26,6 +26,8 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 export default function DetailsScreen() {
   const { full_name } = useLocalSearchParams();
+
+  const router = useRouter();
 
   console.log(full_name);
 
@@ -152,6 +154,7 @@ export default function DetailsScreen() {
               title="Issues"
               color={Colors.dark.issue}
               numberIssue={data?.open_issues}
+              onPress={() => router.push('/repositories/issues')}
               icon={() => (
                 <Octicons
                   name="issue-opened"

@@ -46,7 +46,7 @@ export default function RepositoryScreen() {
       const response = await api.get(
         `/search/repositories?q=${encodeURIComponent(
           debouncedSearch || 'monero'
-        )}&sort=stars&order=desc&page=${pageParam}&per_page=20`,
+        )}&sort=stars&order=desc&page=${pageParam}&per_page=100`,
         {
           headers: {
             Authorization: `token ${GITHUB_TOKEN}`,

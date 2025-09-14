@@ -34,6 +34,20 @@ export default function RepoLayout() {
           headerBackground: () => <View style={styles.container} />,
         }}
       />
+
+      <Stack.Screen
+        name="issues"
+        options={{
+          title: 'Issues',
+          headerShown: true,
+          headerTintColor: 'white',
+          headerBackTitle: 'Back',
+          headerBackVisible: true,
+          headerStyle: {
+            backgroundColor: Colors.dark.background,
+          },
+        }}
+      />
     </Stack>
   );
 }
