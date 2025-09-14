@@ -58,6 +58,8 @@ export default function CardIssue({
         horizontal
         contentContainerStyle={styles.container}
         showsHorizontalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled={true}
       >
         {labels.map((item) => (
           <Tag title={item.name} backgroundColor={`#${item.color}`} />

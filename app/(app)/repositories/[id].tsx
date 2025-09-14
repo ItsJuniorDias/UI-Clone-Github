@@ -154,7 +154,14 @@ export default function DetailsScreen() {
               title="Issues"
               color={Colors.dark.issue}
               numberIssue={data?.open_issues}
-              onPress={() => router.push('/repositories/issues')}
+              onPress={() =>
+                router.push({
+                  pathname: '/repositories/issues',
+                  params: {
+                    full_name,
+                  },
+                })
+              }
               icon={() => (
                 <Octicons
                   name="issue-opened"

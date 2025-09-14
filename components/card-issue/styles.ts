@@ -4,7 +4,6 @@ import styled from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  /* background-color: red; */
   padding: ${scale.sm};
   border-top-width: 0.5px;
   border-bottom-width: 0.5px;
@@ -19,7 +18,7 @@ export const RowTag = styled.ScrollView`
   width: 100%;
   flex-direction: row;
   gap: ${scale.sm};
- 
+
   padding-left: ${scale.lg};
   margin-top: ${scale.sm}
 `;
