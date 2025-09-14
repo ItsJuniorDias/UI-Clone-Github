@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 export const Container = styled.TouchableOpacity`
   width: 100%;
   height: 64px;
-  background-color: ${Colors.dark.tabBarBackground};
+  background-color: ${Colors.dark.backgroundBody};
   border-top-color: ${Colors.dark.icon};
   border-bottom-color: ${Colors.dark.icon};
   border-width: 0.5px;

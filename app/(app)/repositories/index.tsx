@@ -71,7 +71,15 @@ export default function RepositoryScreen() {
       description={description}
       star={star}
       language={language}
-      onPress={() => router.push('/(app)/repositories/42')}
+      onPress={() =>
+        router.push({
+          pathname: `/(app)/repositories/[id]`,
+          params: {
+            id: subtitle,
+            full_name: subtitle,
+          },
+        })
+      }
     />
   );
 
@@ -97,7 +105,7 @@ export default function RepositoryScreen() {
             <Input
               value={search}
               onChangeText={setSearch}
-              placeholder="Search repository..."
+              placeholder="Search repository"
               placeholderTextColor={Colors.dark.white}
             />
           </Animated.View>

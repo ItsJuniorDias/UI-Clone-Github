@@ -1,5 +1,5 @@
-import { Text } from "@/components";
-import Feather from "@expo/vector-icons/Feather";
+import { Text } from '@/components';
+import Feather from '@expo/vector-icons/Feather';
 import {
   Badge,
   Container,
@@ -7,10 +7,10 @@ import {
   ContentBadge,
   Row,
   Thumbnail,
-} from "./styles";
-import { Colors } from "@/constants/theme";
+} from './styles';
+import { Colors } from '@/constants/theme';
 
-import colors_language from "../../constants/colors-language.json";
+import colors_language from '../../constants/colors-language.json';
 
 interface CardRepositoriesProps {
   title: string;
@@ -32,7 +32,7 @@ export default function CardRepositories({
   onPress,
 }: CardRepositoriesProps) {
   const getLanguageColor = (language: string): string => {
-    return colors_language[language]?.color ?? "#cccccc";
+    return colors_language[language]?.color ?? '#cccccc';
   };
 
   return (
