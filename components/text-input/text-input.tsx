@@ -1,6 +1,7 @@
+import { TextInputProps } from "react-native";
 import { Input } from "./styles";
 
-interface TextInputProps {
+interface TextInputCustomProps extends TextInputProps {
   value: string;
   onChangeText: (item: string) => void;
   placeholder: string;
@@ -12,9 +13,11 @@ export default function TextInputCustom({
   onChangeText,
   placeholder,
   placeholderTextColor,
-}: TextInputProps) {
+  ...props
+}: TextInputCustomProps) {
   return (
     <Input
+      {...props}
       placeholder={placeholder}
       placeholderTextColor={placeholderTextColor}
       value={value}

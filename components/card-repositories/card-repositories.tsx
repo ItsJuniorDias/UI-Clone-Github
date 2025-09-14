@@ -30,7 +30,7 @@ export default function CardRepositories({
   language,
 }: CardRepositoriesProps) {
   const getLanguageColor = (language: string): string => {
-    return colors_language[language]?.color ?? "#cccccc"; // fallback se não existir
+    return colors_language[language]?.color ?? "#cccccc";
   };
 
   return (
