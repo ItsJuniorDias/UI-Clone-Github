@@ -1,16 +1,22 @@
-import { Colors } from "@/constants/theme";
-import { Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Colors } from '@/constants/theme';
+import { Stack } from 'expo-router';
+import { StyleSheet, View } from 'react-native';
 
 export default function RepoLayout() {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerShown: true,
+        animation: 'ios_from_right',
+        gestureEnabled: true,
+      }}
+    >
       <Stack.Screen
         name="index"
         options={{
-          title: "Repositories",
+          title: 'Repositories',
           headerShown: true,
-          headerTintColor: "white",
+          headerTintColor: 'white',
           headerStyle: {
             backgroundColor: Colors.dark.background,
           },
@@ -20,11 +26,11 @@ export default function RepoLayout() {
       <Stack.Screen
         name="[id]"
         options={{
-          title: "",
+          title: '',
           headerShown: true,
-          headerBackTitle: "Back",
+          headerBackTitle: 'Back',
           headerBackVisible: true,
-          headerTintColor: "white",
+          headerTintColor: 'white',
           headerBackground: () => <View style={styles.container} />,
         }}
       />
