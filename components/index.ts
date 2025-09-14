@@ -1,3 +1,4 @@
-import TextCustom from "./text/text";
+import Text from "./text/text";
+import Card from "./card-repositories/card-repositories"
 
-export { TextCustom };
+export { Text, Card };

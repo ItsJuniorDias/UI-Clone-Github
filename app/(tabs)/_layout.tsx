@@ -17,9 +17,14 @@ export default function TabLayout() {
         tabBarStyle: {
           position: "absolute",
           backgroundColor: "transparent",
+          flex: 1,
         },
         tabBarBackground: () => (
-          <BlurView tint="dark" intensity={80} style={{ flex: 1 }} />
+          <BlurView
+            tint="dark"
+            intensity={80}
+            style={{ flex: 1, backgroundColor: "transparent" }}
+          />
         ),
       }}
     >

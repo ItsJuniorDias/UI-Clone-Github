@@ -8,6 +8,6 @@ interface TextProps {
 
 export const TextCustom = styled.Text<TextProps>`
   font-family: ${({ fontFamily }) => fontFamily};
-  font-size:  ${({ size }) => size};
+  font-size:  ${({ size }) => size}px;
   color: ${({ color }) => color};
 `;

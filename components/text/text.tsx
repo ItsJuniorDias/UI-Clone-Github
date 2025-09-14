@@ -16,9 +16,9 @@ export default function Text({
   ...props
 }: TextCustomProps) {
   const objectFont = {
-    regular: "Roboto-Regular",
-    "semi-bold": "Roboto-SemiBold",
-    bold: "Roboto-Bold",
+    regular: "RobotoRegular",
+    "semi-bold": "RobotoSemiBold",
+    bold: "RobotoBold",
   };
 
   const objectSize = {
