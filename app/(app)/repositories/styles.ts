@@ -7,7 +7,11 @@ import styled from "styled-components/native";
 export const Container = styled.ScrollView`
   flex: 1;
   background-color: ${Colors.dark.background};
+`;
+
+export const ContentHeader = styled.View`
   padding: ${scale.md};
+  margin-bottom: ${scale.sm};
 `;
 
 export const Row = styled.View`

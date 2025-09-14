@@ -33,19 +33,6 @@ export default function RootLayout() {
 
         <Stack initialRouteName="(app)">
           <Stack.Screen name="(app)" options={{ headerShown: false }} />
-
-          <Stack.Screen
-            name="(details)/index"
-            options={{
-              headerShown: true,
-              headerTitle: "",
-              headerTitleAlign: "center",
-              headerTintColor: "white",
-              headerBackground: () => <View style={styles.container} />,
-              headerBackTitle: "Back",
-              headerBackVisible: true,
-            }}
-          />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>

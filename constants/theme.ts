@@ -13,6 +13,13 @@ export const Colors = {
     white: "#FFFFFF",
     black: "#000000",
     gray: "#ddd",
+    issue: "#42d46a",
+    pullRequest: "#2b90ff",
+    actions: "#f8db48",
+    releases: "#43434d",
+    contributors: "#f37317",
+    watchers: "#ffd058",
+    license: "#e44154",
   },
 };
 

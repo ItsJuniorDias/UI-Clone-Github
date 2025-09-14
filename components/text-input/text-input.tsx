@@ -1,5 +1,8 @@
-import { TextInputProps } from "react-native";
-import { Input } from "./styles";
+import { TextInputProps } from 'react-native';
+
+import { Ionicons } from '@expo/vector-icons';
+
+import { Input, Container } from './styles';
 
 interface TextInputCustomProps extends TextInputProps {
   value: string;
@@ -16,12 +19,17 @@ export default function TextInputCustom({
   ...props
 }: TextInputCustomProps) {
   return (
-    <Input
-      {...props}
-      placeholder={placeholder}
-      placeholderTextColor={placeholderTextColor}
-      value={value}
-      onChangeText={(item: string) => onChangeText(item)}
-    />
+    <Container>
+      <Ionicons name="search" size={20} color="white" />
+
+      <Input
+        {...props}
+        placeholder={placeholder}
+        placeholderTextColor={placeholderTextColor}
+        value={value}
+        onChangeText={(item: string) => onChangeText(item)}
+        autoCapitalize="none"
+      />
+    </Container>
   );
 }

@@ -1,4 +1,4 @@
-import { Colors } from "@/constants/theme";
+import { Colors } from '@/constants/theme';
 import {
   View,
   StyleSheet,
@@ -7,12 +7,12 @@ import {
   Animated,
   NativeSyntheticEvent,
   NativeScrollEvent,
-} from "react-native";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useRef, useState, useEffect } from "react";
-import { Card, Input } from "@/components";
-import { api } from "@/services/api";
-import { useRouter } from "expo-router";
+} from 'react-native';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useRef, useState, useEffect } from 'react';
+import { Card, Input } from '@/components';
+import { api } from '@/services/api';
+import { useRouter } from 'expo-router';
 
 type ItemProps = {
   title: string;
@@ -26,7 +26,7 @@ type ItemProps = {
 export default function RepositoryScreen() {
   const scrollY = useRef(new Animated.Value(0)).current;
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
   const router = useRouter();
@@ -41,7 +41,7 @@ export default function RepositoryScreen() {
   const fetchRepositories = async ({ pageParam = 1 }) => {
     const response = await api.get(
       `/search/repositories?q=${encodeURIComponent(
-        debouncedSearch || "monero"
+        debouncedSearch || 'monero'
       )}&sort=stars&order=desc&page=${pageParam}&per_page=20`
     );
     return { ...response.data, nextPage: pageParam + 1 };
@@ -49,7 +49,7 @@ export default function RepositoryScreen() {
 
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["repositories", debouncedSearch],
+      queryKey: ['repositories', debouncedSearch],
       queryFn: fetchRepositories,
       getNextPageParam: (lastPage) =>
         lastPage.items.length > 0 ? lastPage.nextPage : undefined,
@@ -71,7 +71,7 @@ export default function RepositoryScreen() {
       description={description}
       star={star}
       language={language}
-      onPress={() => router.push("/(details)")}
+      onPress={() => router.push('/(app)/repositories/42')}
     />
   );
 
@@ -80,7 +80,7 @@ export default function RepositoryScreen() {
   const translateY = scrollY.interpolate({
     inputRange: [0, 50],
     outputRange: [0, -60],
-    extrapolate: "clamp",
+    extrapolate: 'clamp',
   });
 
   return (
@@ -140,11 +140,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.dark.background,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   searchContainer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
