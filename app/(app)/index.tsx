@@ -20,7 +20,7 @@ export default function HomeScreen() {
         <Text
           title="My Work"
           color={Colors.dark.white}
-          size="md"
+          size="lg"
           fontFamily="semi-bold"
         />
       </View>
@@ -109,5 +109,6 @@ const styles = StyleSheet.create({
   content: {
     paddingLeft: 24,
     paddingBottom: 16,
+    marginTop: 24,
   },
 });
