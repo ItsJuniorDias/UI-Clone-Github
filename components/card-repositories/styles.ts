@@ -39,7 +39,7 @@ export const Content = styled.View`
 export const Badge = styled.View<BadgeProps>`
   width: 12px;
   height: 12px;
-  border-radius: ${scale.sm};
+  border-radius: ${scale.xl};
   background-color: ${({ backgroundColor }) => backgroundColor} ;
 `;
 

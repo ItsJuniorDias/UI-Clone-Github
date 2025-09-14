@@ -1,16 +1,7 @@
 import { Colors } from "@/constants/theme";
-import { Image } from "expo-image";
-import { View, StyleSheet, FlatList } from "react-native";
-
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-} from "@tanstack/react-query";
-
+import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { Text, Card } from "@/components";
-import { useEffect, useState } from "react";
 import { api } from "@/services/api";
 
 type ItemProps = {
@@ -23,18 +14,21 @@ type ItemProps = {
 };
 
 export default function RepositoryScreen() {
-  const queryClient = useQueryClient();
-
-  const fetch = async () => {
+  const fetchRepositories = async ({ pageParam = 1 }) => {
     const response = await api.get(
-      "/search/repositories?q={monero}&sort=stars&order=desc&page={1}&per_page=20"
+      `/search/repositories?q=monero&sort=stars&order=desc&page=${pageParam}&per_page=20`
     );
-    console.log(response.data, "RESPONSE");
-
-    return response.data;
+    return { ...response.data, nextPage: pageParam + 1 };
   };
 
-  const query = useQuery({ queryKey: ["repositories"], queryFn: fetch });
+  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useInfiniteQuery({
+      queryKey: ["repositories"],
+      queryFn: fetchRepositories,
+      getNextPageParam: (lastPage) =>
+        lastPage.items.length > 0 ? lastPage.nextPage : undefined,
+      initialPageParam: 1,
+    });
 
   const Item = ({
     title,
@@ -54,22 +48,39 @@ export default function RepositoryScreen() {
     />
   );
 
+  const repositories = data?.pages.flatMap((page) => page.items) ?? [];
+
   return (
     <View style={styles.container}>
-      <FlatList
-        data={query?.data?.items}
-        renderItem={({ item }) => (
-          <Item
-            title={item.name}
-            thumbnail={item.owner.avatar_url}
-            subtitle={item.full_name}
-            description={item.description}
-            star={item.stargazers_count}
-            language={item.language}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-      />
+      {isLoading && (
+        <ActivityIndicator size="large" color={Colors.light.white} />
+      )}
+
+      {!isLoading && (
+        <FlatList
+          data={repositories}
+          renderItem={({ item }) => (
+            <Item
+              title={item.name}
+              thumbnail={item.owner.avatar_url}
+              subtitle={item.full_name}
+              description={item.description}
+              star={item.stargazers_count}
+              language={item.language}
+            />
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          onEndReached={() => {
+            if (hasNextPage) fetchNextPage();
+          }}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={
+            isFetchingNextPage ? (
+              <ActivityIndicator size="small" color={Colors.light.white} />
+            ) : null
+          }
+        />
+      )}
     </View>
   );
 }
@@ -78,5 +89,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.light.background,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

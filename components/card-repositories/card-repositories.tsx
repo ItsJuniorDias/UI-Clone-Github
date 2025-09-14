@@ -10,6 +10,8 @@ import {
 } from "./styles";
 import { Colors } from "@/constants/theme";
 
+import colors_language from "../../constants/colors-language.json";
+
 interface CardRepositoriesProps {
   title: string;
   thumbnail: string;
@@ -27,16 +29,8 @@ export default function CardRepositories({
   star,
   language,
 }: CardRepositoriesProps) {
-  const tagBadge = {
-    "C++": Colors.light.language["C++"],
-    C: Colors.light.language.C,
-    Go: Colors.light.language.Go,
-    Java: Colors.light.language.Java,
-    TypesSript: Colors.light.language.TypesSript,
-    Javascript: Colors.light.language.Javascript,
-    Ruby: Colors.light.language.Ruby,
-    Kotlin: Colors.light.language.Kotlin,
-    Swift: Colors.light.language.Swift,
+  const getLanguageColor = (language: string): string => {
+    return colors_language[language]?.color ?? "#cccccc"; // fallback se não existir
   };
 
   return (
@@ -79,9 +73,7 @@ export default function CardRepositories({
           />
 
           <ContentBadge>
-            <Badge
-              backgroundColor={tagBadge[language as keyof typeof tagBadge]}
-            />
+            <Badge backgroundColor={getLanguageColor(language)} />
 
             <Text
               title={language}
