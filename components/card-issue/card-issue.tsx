@@ -7,7 +7,24 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 import { ItemProps } from '@/app/(app)/repositories/issues';
 import { scale } from '@/constants/scale';
 
-export default function CardIssue({ title, username, labels }: ItemProps) {
+export default function CardIssue({
+  title,
+  username,
+  labels,
+  created_at,
+}: ItemProps) {
+  const diffToDays = (isoDate: string) => {
+    const date = new Date(isoDate);
+    const now = new Date();
+
+    const diffMs = now.getTime() - date.getTime();
+
+    // converte para dias
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    return `${diffDays}d`;
+  };
+
   return (
     <Container>
       <Row>
@@ -30,8 +47,8 @@ export default function CardIssue({ title, username, labels }: ItemProps) {
         </ContentText>
 
         <Text
-          title={'17d'}
-          fontFamily="regular"
+          title={diffToDays(created_at)}
+          fontFamily="semi-bold"
           color={Colors.dark.white}
           size="sm"
         />
@@ -52,6 +69,6 @@ export default function CardIssue({ title, username, labels }: ItemProps) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingRight: Dimensions.get('screen').width,
+    width: Dimensions.get('screen').width,
   },
 });

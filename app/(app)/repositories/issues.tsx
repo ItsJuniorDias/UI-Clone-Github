@@ -17,6 +17,7 @@ export type ItemProps = {
   title: string;
   labels: LabelsProps[];
   username: string;
+  created_at: string;
 };
 
 export default function IssuesScreen() {
@@ -80,15 +81,6 @@ export default function IssuesScreen() {
           description: '',
         },
         {
-          id: 346541963,
-          node_id: 'MDU6TGFiZWwzNDY1NDE5NjM=',
-          url: 'https://api.github.com/repos/monero-project/monero/labels/pending%20review',
-          name: 'pending review',
-          color: 'fbca04',
-          default: false,
-          description: null,
-        },
-        {
           id: 6305215258,
           node_id: 'LA_kwDOASa_i88AAAABd9HzGg',
           url: 'https://api.github.com/repos/monero-project/monero/labels/wallet',
@@ -139,9 +131,14 @@ export default function IssuesScreen() {
     },
   ];
 
-  const Item = ({ title, labels, username }: ItemProps) => (
+  const Item = ({ title, labels, username, created_at }: ItemProps) => (
     <View>
-      <CardIssue title={title} username={username} labels={labels} />
+      <CardIssue
+        title={title}
+        username={username}
+        labels={labels}
+        created_at={created_at}
+      />
     </View>
   );
 
@@ -154,6 +151,7 @@ export default function IssuesScreen() {
             title={item.title}
             labels={item.labels}
             username={item.user.login}
+            created_at={item.created_at}
           />
         )}
         keyExtractor={(item) => item.id}
