@@ -12,6 +12,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRef, useState, useEffect } from "react";
 import { Card, Input } from "@/components";
 import { api } from "@/services/api";
+import { useRouter } from "expo-router";
 
 type ItemProps = {
   title: string;
@@ -27,6 +28,8 @@ export default function RepositoryScreen() {
 
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -68,6 +71,7 @@ export default function RepositoryScreen() {
       description={description}
       star={star}
       language={language}
+      onPress={() => router.push("/(details)")}
     />
   );
 
@@ -82,7 +86,7 @@ export default function RepositoryScreen() {
   return (
     <View style={styles.container}>
       {isLoading && (
-        <ActivityIndicator size="large" color={Colors.light.white} />
+        <ActivityIndicator size="large" color={Colors.dark.white} />
       )}
 
       {!isLoading && (
@@ -94,7 +98,7 @@ export default function RepositoryScreen() {
               value={search}
               onChangeText={setSearch}
               placeholder="Search repository..."
-              placeholderTextColor={Colors.light.white}
+              placeholderTextColor={Colors.dark.white}
             />
           </Animated.View>
 
@@ -118,7 +122,7 @@ export default function RepositoryScreen() {
             onEndReachedThreshold={0.5}
             ListFooterComponent={
               isFetchingNextPage ? (
-                <ActivityIndicator size="small" color={Colors.light.white} />
+                <ActivityIndicator size="small" color={Colors.dark.white} />
               ) : null
             }
             onScroll={(e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -135,7 +139,7 @@ export default function RepositoryScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.light.background,
+    backgroundColor: Colors.dark.background,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     padding: 10,
-    backgroundColor: Colors.light.background,
+    backgroundColor: Colors.dark.background,
     zIndex: 10,
   },
 });

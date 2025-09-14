@@ -8,7 +8,10 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import "react-native-reanimated";
 
+import { StyleSheet, View } from "react-native";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Colors } from "@/constants/theme";
 
 const queryClient = new QueryClient();
 
@@ -27,10 +30,31 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={DefaultTheme}>
         <StatusBar style="light" />
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+        <Stack initialRouteName="(app)">
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
+
+          <Stack.Screen
+            name="(details)/index"
+            options={{
+              headerShown: true,
+              headerTitle: "",
+              headerTitleAlign: "center",
+              headerTintColor: "white",
+              headerBackground: () => <View style={styles.container} />,
+              headerBackTitle: "Back",
+              headerBackVisible: true,
+            }}
+          />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.dark.background,
+  },
+});

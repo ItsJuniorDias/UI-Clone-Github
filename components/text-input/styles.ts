@@ -6,6 +6,6 @@ export const Input = styled.TextInput`
   border-radius: 8px;
   padding-left: 12px;
   padding-right: 12px;
-  background-color: ${Colors.light.background};
-  color: ${Colors.light.white};
+  background-color: ${Colors.dark.background};
+  color: ${Colors.dark.white};
 `;

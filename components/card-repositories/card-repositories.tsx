@@ -19,6 +19,7 @@ interface CardRepositoriesProps {
   description: string;
   star: number;
   language: string;
+  onPress: () => void;
 }
 
 export default function CardRepositories({
@@ -28,20 +29,21 @@ export default function CardRepositories({
   description,
   star,
   language,
+  onPress,
 }: CardRepositoriesProps) {
   const getLanguageColor = (language: string): string => {
     return colors_language[language]?.color ?? "#cccccc";
   };
 
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Row>
         <Thumbnail source={thumbnail} />
 
         <Text
           title={title}
           fontFamily="regular"
-          color={Colors.light.white}
+          color={Colors.dark.white}
           size="sm"
         />
       </Row>
@@ -50,25 +52,25 @@ export default function CardRepositories({
         <Text
           title={subtitle}
           fontFamily="bold"
-          color={Colors.light.white}
+          color={Colors.dark.white}
           size="sm"
         />
 
         <Text
           title={description}
           fontFamily="semi-bold"
-          color={Colors.light.white}
+          color={Colors.dark.white}
           numberOfLines={2}
           size="sm"
         />
 
         <Row>
-          <Feather name="star" size={24} color={Colors.light.icon} />
+          <Feather name="star" size={24} color={Colors.dark.icon} />
 
           <Text
             title={star.toString()}
             size="sm"
-            color={Colors.light.icon}
+            color={Colors.dark.icon}
             fontFamily="semi-bold"
           />
 
@@ -78,7 +80,7 @@ export default function CardRepositories({
             <Text
               title={language}
               size="sm"
-              color={Colors.light.icon}
+              color={Colors.dark.icon}
               fontFamily="semi-bold"
             />
           </ContentBadge>
