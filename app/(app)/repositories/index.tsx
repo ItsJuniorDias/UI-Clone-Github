@@ -26,14 +26,13 @@ type ItemProps = {
 };
 
 export default function RepositoryScreen() {
-  const scrollY = useRef(new Animated.Value(0)).current;
+  const searchAnim = useRef(new Animated.Value(0)).current; // 0 = visível, -60 = escondido
+  const lastScrollY = useRef(0);
 
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
   const router = useRouter();
-
-  console.log(GITHUB_TOKEN, 'GITHUB TOKEN');
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -99,11 +98,25 @@ export default function RepositoryScreen() {
 
   const repositories = data?.pages.flatMap((page) => page.items) ?? [];
 
-  const translateY = scrollY.interpolate({
-    inputRange: [0, 50],
-    outputRange: [0, -60],
-    extrapolate: 'clamp',
-  });
+  const handleScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const currentY = e.nativeEvent.contentOffset.y;
+
+    if (currentY > lastScrollY.current && currentY > 50) {
+      Animated.timing(searchAnim, {
+        toValue: -60,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
+    } else if (currentY < lastScrollY.current) {
+      Animated.timing(searchAnim, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: true,
+      }).start();
+    }
+
+    lastScrollY.current = currentY;
+  };
 
   return (
     <View style={styles.container}>
@@ -114,7 +127,10 @@ export default function RepositoryScreen() {
       {!isLoading && (
         <>
           <Animated.View
-            style={[styles.searchContainer, { transform: [{ translateY }] }]}
+            style={[
+              styles.searchContainer,
+              { transform: [{ translateY: searchAnim }] },
+            ]}
           >
             <Input
               value={search}
@@ -147,9 +163,7 @@ export default function RepositoryScreen() {
                 <ActivityIndicator size="small" color={Colors.dark.white} />
               ) : null
             }
-            onScroll={(e: NativeSyntheticEvent<NativeScrollEvent>) => {
-              scrollY.setValue(e.nativeEvent.contentOffset.y);
-            }}
+            onScroll={handleScroll}
             scrollEventThrottle={16}
           />
         </>
