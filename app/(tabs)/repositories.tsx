@@ -1,7 +1,17 @@
 import { Colors } from "@/constants/theme";
-import { View, StyleSheet, FlatList, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+  Animated,
+  TextInput,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from "react-native";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { Text, Card } from "@/components";
+import { useRef, useState, useEffect } from "react";
+import { Card } from "@/components";
 import { api } from "@/services/api";
 
 type ItemProps = {
@@ -14,16 +24,29 @@ type ItemProps = {
 };
 
 export default function RepositoryScreen() {
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 1000);
+    return () => clearTimeout(handler);
+  }, [search]);
+
   const fetchRepositories = async ({ pageParam = 1 }) => {
     const response = await api.get(
-      `/search/repositories?q=monero&sort=stars&order=desc&page=${pageParam}&per_page=20`
+      `/search/repositories?q=${encodeURIComponent(
+        debouncedSearch || "monero"
+      )}&sort=stars&order=desc&page=${pageParam}&per_page=20`
     );
     return { ...response.data, nextPage: pageParam + 1 };
   };
 
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["repositories"],
+      queryKey: ["repositories", debouncedSearch],
       queryFn: fetchRepositories,
       getNextPageParam: (lastPage) =>
         lastPage.items.length > 0 ? lastPage.nextPage : undefined,
@@ -50,6 +73,12 @@ export default function RepositoryScreen() {
 
   const repositories = data?.pages.flatMap((page) => page.items) ?? [];
 
+  const translateY = scrollY.interpolate({
+    inputRange: [0, 50],
+    outputRange: [0, -60],
+    extrapolate: "clamp",
+  });
+
   return (
     <View style={styles.container}>
       {isLoading && (
@@ -57,29 +86,48 @@ export default function RepositoryScreen() {
       )}
 
       {!isLoading && (
-        <FlatList
-          data={repositories}
-          renderItem={({ item }) => (
-            <Item
-              title={item.name}
-              thumbnail={item.owner.avatar_url}
-              subtitle={item.full_name}
-              description={item.description}
-              star={item.stargazers_count}
-              language={item.language}
+        <>
+          <Animated.View
+            style={[styles.searchContainer, { transform: [{ translateY }] }]}
+          >
+            <TextInput
+              placeholder="Buscar repositório..."
+              placeholderTextColor={Colors.light.white}
+              style={styles.searchInput}
+              value={search}
+              onChangeText={setSearch}
             />
-          )}
-          keyExtractor={(item) => item.id.toString()}
-          onEndReached={() => {
-            if (hasNextPage) fetchNextPage();
-          }}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={
-            isFetchingNextPage ? (
-              <ActivityIndicator size="small" color={Colors.light.white} />
-            ) : null
-          }
-        />
+          </Animated.View>
+
+          <FlatList
+            contentContainerStyle={{ paddingTop: 70 }}
+            data={repositories}
+            renderItem={({ item }) => (
+              <Item
+                title={item.name}
+                thumbnail={item.owner.avatar_url}
+                subtitle={item.full_name}
+                description={item.description}
+                star={item.stargazers_count}
+                language={item.language}
+              />
+            )}
+            keyExtractor={(item) => item.id.toString()}
+            onEndReached={() => {
+              if (hasNextPage) fetchNextPage();
+            }}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={
+              isFetchingNextPage ? (
+                <ActivityIndicator size="small" color={Colors.light.white} />
+              ) : null
+            }
+            onScroll={(e: NativeSyntheticEvent<NativeScrollEvent>) => {
+              scrollY.setValue(e.nativeEvent.contentOffset.y);
+            }}
+            scrollEventThrottle={16}
+          />
+        </>
       )}
     </View>
   );
@@ -91,5 +139,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.background,
     alignItems: "center",
     justifyContent: "center",
+  },
+  searchContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    padding: 10,
+    backgroundColor: Colors.light.background,
+    zIndex: 10,
+  },
+  searchInput: {
+    height: 40,
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    backgroundColor: Colors.light.background,
+    color: Colors.light.white,
   },
 });

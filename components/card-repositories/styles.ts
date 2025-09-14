@@ -7,14 +7,14 @@ interface BadgeProps {
   backgroundColor: string;
 }
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   width: 100%;
   height: 192px;
   /* margin-bottom: ${scale.lg}; */
   background-color: ${Colors.light.background};
   border-top-color: ${Colors.light.icon};
   border-bottom-color: ${Colors.light.icon};
-  border-width: 0.2px;
+  border-width: 0.5px;
   padding: ${scale.sm};
 `;
 
