@@ -36,6 +36,15 @@ export default function TabLayout() {
           headerTitle: 'Home',
           headerTitleAlign: 'center',
           headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: Colors.dark.background, // fundo do header
+          },
+          headerSearchBarOptions: {
+            placeholder: 'Search',
+            onChangeText: (text) => console.log('Texto digitado:', text),
+            onSubmitEditing: (event) =>
+              console.log('Busca enviada:', event.nativeEvent.text),
+          },
           headerBackground: () => <View style={styles.container} />,
           tabBarIcon: ({ color }) => (
             <Ionicons name="home-outline" size={24} color={color} />

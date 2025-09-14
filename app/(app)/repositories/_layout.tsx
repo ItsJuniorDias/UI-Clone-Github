@@ -17,6 +17,7 @@ export default function RepoLayout() {
           title: 'Repositories',
           headerShown: true,
           headerTintColor: 'white',
+
           headerStyle: {
             backgroundColor: Colors.dark.background,
           },
