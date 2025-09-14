@@ -14,6 +14,8 @@ import { Card, Input } from '@/components';
 import { api } from '@/services/api';
 import { useRouter } from 'expo-router';
 
+import { GITHUB_TOKEN } from '@env';
+
 type ItemProps = {
   title: string;
   thumbnail: string;
@@ -31,6 +33,8 @@ export default function RepositoryScreen() {
 
   const router = useRouter();
 
+  console.log(GITHUB_TOKEN, 'GITHUB TOKEN');
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(search);
@@ -39,12 +43,22 @@ export default function RepositoryScreen() {
   }, [search]);
 
   const fetchRepositories = async ({ pageParam = 1 }) => {
-    const response = await api.get(
-      `/search/repositories?q=${encodeURIComponent(
-        debouncedSearch || 'monero'
-      )}&sort=stars&order=desc&page=${pageParam}&per_page=20`
-    );
-    return { ...response.data, nextPage: pageParam + 1 };
+    try {
+      const response = await api.get(
+        `/search/repositories?q=${encodeURIComponent(
+          debouncedSearch || 'monero'
+        )}&sort=stars&order=desc&page=${pageParam}&per_page=20`,
+        {
+          headers: {
+            Authorization: `token ${GITHUB_TOKEN}`,
+          },
+        }
+      );
+
+      return { ...response.data, nextPage: pageParam + 1 };
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =

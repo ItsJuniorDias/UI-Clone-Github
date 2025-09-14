@@ -9,7 +9,6 @@ interface BadgeProps {
 
 export const Container = styled.TouchableOpacity`
   width: 100%;
-  height: 192px;
   background-color: ${Colors.dark.background};
   border-top-color: ${Colors.dark.icon};
   border-bottom-color: ${Colors.dark.icon};

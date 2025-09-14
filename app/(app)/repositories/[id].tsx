@@ -6,6 +6,8 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import { Colors } from '@/constants/theme';
 
+import { GITHUB_TOKEN } from '@env';
+
 import { useLocalSearchParams } from 'expo-router';
 
 import {
@@ -20,7 +22,7 @@ import {
 
 import { api } from '@/services/api';
 import { useQuery } from '@tanstack/react-query';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 export default function DetailsScreen() {
   const { full_name } = useLocalSearchParams();
@@ -28,20 +30,35 @@ export default function DetailsScreen() {
   console.log(full_name);
 
   const fetch = async () => {
-    const response = await api.get(`/repos/${full_name}`);
+    try {
+      const response = await api.get(`/repos/${full_name}`, {
+        headers: {
+          Authorization: `token ${GITHUB_TOKEN}`,
+        },
+      });
 
-    return response.data;
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const { data, isLoading } = useQuery({ queryKey: ['repos'], queryFn: fetch });
+  const { data, isLoading } = useQuery({
+    queryKey: ['repos'],
+    queryFn: fetch,
+  });
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color={Colors.dark.white} />
+      </View>
+    );
+  }
 
   return (
     <>
       <Container>
-        {isLoading && (
-          <ActivityIndicator size="large" color={Colors.dark.white} />
-        )}
-
         {!isLoading && (
           <>
             <ContentHeader>
@@ -72,6 +89,7 @@ export default function DetailsScreen() {
                   title={data?.description}
                   fontFamily="regular"
                   color={Colors.dark.white}
+                  numberOfLines={4}
                   size="sm"
                 />
 
@@ -209,3 +227,12 @@ export default function DetailsScreen() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.dark.background,
+  },
+});
