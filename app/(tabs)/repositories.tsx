@@ -5,13 +5,12 @@ import {
   FlatList,
   ActivityIndicator,
   Animated,
-  TextInput,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRef, useState, useEffect } from "react";
-import { Card } from "@/components";
+import { Card, Input } from "@/components";
 import { api } from "@/services/api";
 
 type ItemProps = {
@@ -25,6 +24,7 @@ type ItemProps = {
 
 export default function RepositoryScreen() {
   const scrollY = useRef(new Animated.Value(0)).current;
+
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState(search);
 
@@ -90,12 +90,11 @@ export default function RepositoryScreen() {
           <Animated.View
             style={[styles.searchContainer, { transform: [{ translateY }] }]}
           >
-            <TextInput
-              placeholder="Buscar repositório..."
-              placeholderTextColor={Colors.light.white}
-              style={styles.searchInput}
+            <Input
               value={search}
               onChangeText={setSearch}
+              placeholder="Search repository..."
+              placeholderTextColor={Colors.light.white}
             />
           </Animated.View>
 
@@ -148,12 +147,5 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: Colors.light.background,
     zIndex: 10,
-  },
-  searchInput: {
-    height: 40,
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    backgroundColor: Colors.light.background,
-    color: Colors.light.white,
   },
 });
