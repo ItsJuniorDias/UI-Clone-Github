@@ -31,6 +31,7 @@ export const Thumbnail = styled(Image)`
 `
 
 export const Content = styled.View`
+
   margin-top: ${scale.sm};
   gap: ${scale.sm};
 `;

@@ -2,7 +2,16 @@ import { Colors } from "@/constants/theme";
 import { Image } from "expo-image";
 import { View, StyleSheet, FlatList } from "react-native";
 
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+} from "@tanstack/react-query";
+
 import { Text, Card } from "@/components";
+import { useEffect, useState } from "react";
+import { api } from "@/services/api";
 
 type ItemProps = {
   title: string;
@@ -14,53 +23,18 @@ type ItemProps = {
 };
 
 export default function RepositoryScreen() {
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "monero-project",
-      avatar: "https://avatars.githubusercontent.com/u/7450663?v=4",
-      subtitle: "monero",
-      description: "Monero: the secure, private, untraceable cryptocurrency",
-      star: 9.845,
-      language: "C++",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "monero-project",
-      avatar: "https://avatars.githubusercontent.com/u/7450663?v=4",
-      subtitle: "monero-gui",
-      description: "Monero: the secure, private, untraceable cryptocurrency",
-      star: 2.016,
-      language: "C",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "fireice-uk",
-      avatar: "https://avatars.githubusercontent.com/u/5392418?v=4",
-      subtitle: "xmr-stak-cpu",
-      description: "Monero CPU miner",
-      star: 1.121,
-      language: "C++",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d11",
-      title: "fireice-uk",
-      avatar: "https://avatars.githubusercontent.com/u/5392418?v=4",
-      subtitle: "xmr-stak",
-      description: "Free monero ramdomX miner and unified cryptonight miner",
-      star: 4.075,
-      language: "C++",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d00",
-      title: "p2pool",
-      avatar: "https://avatars.githubusercontent.com/u/15806605?v=4",
-      subtitle: "SChernykh/p2pool",
-      description: "Decentralized pool for Monero mining",
-      star: 1313,
-      language: "C++",
-    },
-  ];
+  const queryClient = useQueryClient();
+
+  const fetch = async () => {
+    const response = await api.get(
+      "/search/repositories?q={monero}&sort=stars&order=desc&page={1}&per_page=20"
+    );
+    console.log(response.data, "RESPONSE");
+
+    return response.data;
+  };
+
+  const query = useQuery({ queryKey: ["repositories"], queryFn: fetch });
 
   const Item = ({
     title,
@@ -83,14 +57,14 @@ export default function RepositoryScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={DATA}
+        data={query?.data?.items}
         renderItem={({ item }) => (
           <Item
-            title={item.title}
-            thumbnail={item.avatar}
-            subtitle={item.subtitle}
+            title={item.name}
+            thumbnail={item.owner.avatar_url}
+            subtitle={item.full_name}
             description={item.description}
-            star={item.star}
+            star={item.stargazers_count}
             language={item.language}
           />
         )}

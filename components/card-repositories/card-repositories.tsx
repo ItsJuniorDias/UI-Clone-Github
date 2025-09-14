@@ -64,6 +64,7 @@ export default function CardRepositories({
           title={description}
           fontFamily="semi-bold"
           color={Colors.light.white}
+          numberOfLines={2}
           size="sm"
         />
 
