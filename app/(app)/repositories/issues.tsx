@@ -61,7 +61,11 @@ export default function IssuesScreen() {
   if (isLoading) {
     return (
       <View style={styles.contentLoading}>
-        <ActivityIndicator size="large" color={Colors.dark.white} />
+        <ActivityIndicator
+          testID="activity-indicator"
+          size="large"
+          color={Colors.dark.white}
+        />
       </View>
     );
   }
@@ -69,6 +73,7 @@ export default function IssuesScreen() {
   return (
     <View style={styles.container}>
       <FlatList
+        testID="flatlist"
         data={issues}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
