@@ -5,6 +5,9 @@
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
+## Figma 
+https://www.figma.com/design/O2JHcJiOJoPBl1MIvJZqBT/Untitled?node-id=1-2&t=nj0L0lobL2fPxniu-0
+
 ## UI-Clone-Github
 :octocat: UI Github clone built in react native with expo sdk 54
 
