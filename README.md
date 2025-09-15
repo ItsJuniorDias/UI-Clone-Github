@@ -8,6 +8,12 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 ## UI-Clone-Github
 :octocat: UI Github clone built in react native with expo sdk 54
 
+## Evidence
+
+
+https://github.com/user-attachments/assets/d6ac0e07-3820-41f0-a3a9-89078b2a8a97
+
+
 ## Get started
 
 1. Install dependencies
