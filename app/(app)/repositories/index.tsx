@@ -121,7 +121,11 @@ export default function RepositoryScreen() {
   return (
     <View style={styles.container}>
       {isLoading && (
-        <ActivityIndicator size="large" color={Colors.dark.white} />
+        <ActivityIndicator
+          testID="loading-indicator"
+          size="large"
+          color={Colors.dark.white}
+        />
       )}
 
       {!isLoading && (
