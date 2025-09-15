@@ -69,6 +69,8 @@ export default function RepositoryScreen() {
       initialPageParam: 1,
     });
 
+  console.log(data, isLoading, 'PROPS');
+
   const Item = ({
     title,
     thumbnail,
@@ -145,6 +147,7 @@ export default function RepositoryScreen() {
           </Animated.View>
 
           <FlatList
+            testID="flatlist_testID"
             contentContainerStyle={{ paddingTop: 70 }}
             data={repositories}
             renderItem={({ item }) => (
