@@ -1,27 +1,6 @@
-
-
-
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Figma 
-https://www.figma.com/design/O2JHcJiOJoPBl1MIvJZqBT/Untitled?node-id=1-2&t=nj0L0lobL2fPxniu-0
-
-## UI-Clone-Github
-:octocat: UI Github clone built in react native with expo sdk 54
-
-## Evidence
-
-
-https://github.com/user-attachments/assets/4de8a5e8-24f9-442e-bbab-bb2468a82a41
-
-
-
-## Unit Test
-
-<img width="660" height="606" alt="Screenshot 2025-09-15 at 00 25 21" src="https://github.com/user-attachments/assets/451756b7-68a0-4a67-aae2-be154aeefec5" />
-
 
 ## Get started
 
@@ -69,13 +48,3 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-  ## ENV
-1. Access your GitHub settings
-
-Go to https://github.com/settings/tokens
-
-Or click your profile picture → Settings → Developer settings → Personal access tokens → Tokens (classic). GITHUB_TOKEN
-  
-
-

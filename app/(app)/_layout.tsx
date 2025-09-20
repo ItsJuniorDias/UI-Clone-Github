@@ -1,12 +1,12 @@
-import { Tabs, usePathname, useRouter } from 'expo-router';
-import React from 'react';
-import { BlurView } from 'expo-blur';
+import { BlurView } from "expo-blur";
+import { Tabs } from "expo-router";
+import React from "react";
 
-import { Colors } from '@/constants/theme';
+import { Colors } from "@/constants/theme";
 
-import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { StyleSheet, View } from 'react-native';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { StyleSheet, View } from "react-native";
 
 export default function TabLayout() {
   return (
@@ -15,15 +15,15 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors.dark.tint,
         headerShown: false,
         tabBarStyle: {
-          position: 'absolute',
-          backgroundColor: 'transparent',
+          position: "absolute",
+          backgroundColor: "transparent",
           flex: 1,
         },
         tabBarBackground: () => (
           <BlurView
             tint="dark"
             intensity={80}
-            style={{ flex: 1, backgroundColor: 'transparent' }}
+            style={{ flex: 1, backgroundColor: "transparent" }}
           />
         ),
       }}
@@ -31,19 +31,19 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           headerShown: true,
-          headerTitle: 'Home',
-          headerTitleAlign: 'center',
-          headerTintColor: 'white',
+          headerTitle: "Home",
+          headerTitleAlign: "center",
+          headerTintColor: "white",
           headerStyle: {
             backgroundColor: Colors.dark.background, // fundo do header
           },
           headerSearchBarOptions: {
-            placeholder: 'Search',
-            onChangeText: (text) => console.log('Texto digitado:', text),
+            placeholder: "Search",
+            onChangeText: (text) => console.log("Texto digitado:", text),
             onSubmitEditing: (event) =>
-              console.log('Busca enviada:', event.nativeEvent.text),
+              console.log("Busca enviada:", event.nativeEvent.text),
           },
           headerBackground: () => <View style={styles.container} />,
           tabBarIcon: ({ color }) => (
@@ -54,11 +54,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="repositories"
         options={{
-          title: 'Repositories',
+          title: "Repositories",
           headerShown: false,
-          headerTitle: 'Repositories',
-          headerTitleAlign: 'center',
-          headerTintColor: 'white',
+          headerTitle: "Repositories",
+          headerTitleAlign: "center",
+          headerTintColor: "white",
           headerBackground: () => <View style={styles.container} />,
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="explore" size={24} color={color} />

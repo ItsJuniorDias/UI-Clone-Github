@@ -1,16 +1,15 @@
 {
   "expo": {
-    "name": "ui-clone-github",
-    "slug": "ui-clone-github",
+    "name": "test-app",
+    "slug": "test-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/github.svg",
-    "scheme": "uiclonegithub",
+    "icon": "./assets/images/icon.png",
+    "scheme": "testapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.uiclonegithub"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
@@ -20,8 +19,7 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.uiclonegithub"
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
@@ -32,12 +30,12 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/github.svg",
+          "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
-            "backgroundColor": "#ffffff"
+            "backgroundColor": "#000000"
           }
         }
       ]

@@ -1,17 +1,7 @@
 import { Body, Text } from '@/components';
-import BodyIssue from '@/components/body-issue/body-issue';
-import { scale } from '@/constants/scale';
 import { Colors } from '@/constants/theme';
-import {
-  Feather,
-  FontAwesome5,
-  Ionicons,
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Octicons,
-} from '@expo/vector-icons';
-import { Image } from 'expo-image';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { Feather, MaterialCommunityIcons, Octicons } from '@expo/vector-icons';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 export default function HomeScreen() {
   return (
