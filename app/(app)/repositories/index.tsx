@@ -14,8 +14,6 @@ import { Card, Input } from '@/components';
 import { api } from '@/services/api';
 import { useRouter } from 'expo-router';
 
-import { GITHUB_TOKEN } from '@env';
-
 type ItemProps = {
   title: string;
   thumbnail: string;
@@ -49,7 +47,7 @@ export default function RepositoryScreen() {
         )}&sort=stars&order=desc&page=${pageParam}&per_page=100`,
         {
           headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
+            Authorization: `token ${process.env.GITHUB_TOKEN}`,
           },
         }
       );

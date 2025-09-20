@@ -6,8 +6,6 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import { Colors } from '@/constants/theme';
 
-import { GITHUB_TOKEN } from '@env';
-
 import { useLocalSearchParams, useRouter } from 'expo-router';
 
 import {
@@ -35,7 +33,7 @@ export default function DetailsScreen() {
     try {
       const response = await api.get(`/repos/${full_name}`, {
         headers: {
-          Authorization: `token ${GITHUB_TOKEN}`,
+          Authorization: `token ${process.env.GITHUB_TOKEN}`,
         },
       });
 

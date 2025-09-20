@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "test-app",
-    "slug": "test-app",
+    "name": "ui-clone-github",
+    "slug": "ui-clone-github",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
