@@ -13,7 +13,7 @@ https://github.com/user-attachments/assets/19f1c809-a3f6-4ed9-87cb-f458017675ba
 1. Install dependencies
 
    ```bash
-   npm install
+   npm install --force 
    ```
 
 2. Start the app
