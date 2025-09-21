@@ -2,6 +2,9 @@
   "expo": {
     "name": "ui-clone-github",
     "slug": "ui-clone-github",
+    "extra": {
+      "GITHUB_TOKEN": "process.env.GITHUB_TOKEN"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

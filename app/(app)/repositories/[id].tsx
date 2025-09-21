@@ -31,7 +31,7 @@ export default function DetailsScreen() {
 
   const fetch = async () => {
     try {
-      const response = await api.get(`/repos/${full_name}`, {
+      const response = await api.get(`repos/${full_name}`, {
         headers: {
           Authorization: `token ${process.env.GITHUB_TOKEN}`,
         },

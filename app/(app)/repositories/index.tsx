@@ -23,6 +23,8 @@ type ItemProps = {
   language: string;
 };
 
+console.log(process.env.GITHUB_TOKEN, 'GITHUB_TOKEN');
+
 export default function RepositoryScreen() {
   const searchAnim = useRef(new Animated.Value(0)).current; // 0 = visível, -60 = escondido
   const lastScrollY = useRef(0);
