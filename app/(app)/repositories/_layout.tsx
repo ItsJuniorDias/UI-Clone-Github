@@ -17,10 +17,10 @@ export default function RepoLayout() {
           title: 'Repositories',
           headerShown: true,
           headerTintColor: 'white',
-
           headerStyle: {
             backgroundColor: Colors.dark.background,
           },
+          headerBackTitle: '',
         }}
       />
 
@@ -28,8 +28,8 @@ export default function RepoLayout() {
         name="[id]"
         options={{
           title: '',
-          headerShown: true,
           headerBackTitle: 'Back',
+          headerShown: true,
           headerBackVisible: true,
           headerTintColor: 'white',
           headerBackground: () => <View style={styles.container} />,
@@ -42,7 +42,7 @@ export default function RepoLayout() {
           title: 'Issues',
           headerShown: true,
           headerTintColor: 'white',
-          headerBackTitle: 'Back',
+          headerBackTitle: '',
           headerBackVisible: true,
           headerStyle: {
             backgroundColor: Colors.dark.background,

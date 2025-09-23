@@ -1,71 +1,36 @@
-import { BlurView } from "expo-blur";
-import { Tabs } from "expo-router";
-import React from "react";
+import { BlurView } from 'expo-blur';
+import {
+  Icon,
+  Label,
+  NativeTabs,
+  Tabs,
+} from 'expo-router/unstable-native-tabs';
+import React from 'react';
 
-import { Colors } from "@/constants/theme";
+import { Colors } from '@/constants/theme';
 
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { StyleSheet, View } from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { StyleSheet, View } from 'react-native';
 
 export default function TabLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors.dark.tint,
-        headerShown: false,
-        tabBarStyle: {
-          position: "absolute",
-          backgroundColor: "transparent",
-          flex: 1,
-        },
-        tabBarBackground: () => (
-          <BlurView
-            tint="dark"
-            intensity={80}
-            style={{ flex: 1, backgroundColor: "transparent" }}
-          />
-        ),
-      }}
+    <NativeTabs
+      backgroundColor="transparent"
+      rippleColor="#1789f5"
+      indicatorColor={'#1789f5'}
     >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          headerShown: true,
-          headerTitle: "Home",
-          headerTitleAlign: "center",
-          headerTintColor: "white",
-          headerStyle: {
-            backgroundColor: Colors.dark.background, // fundo do header
-          },
-          headerSearchBarOptions: {
-            placeholder: "Search",
-            onChangeText: (text) => console.log("Texto digitado:", text),
-            onSubmitEditing: (event) =>
-              console.log("Busca enviada:", event.nativeEvent.text),
-          },
-          headerBackground: () => <View style={styles.container} />,
-          tabBarIcon: ({ color }) => (
-            <Ionicons name="home-outline" size={24} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="repositories"
-        options={{
-          title: "Repositories",
-          headerShown: false,
-          headerTitle: "Repositories",
-          headerTitleAlign: "center",
-          headerTintColor: "white",
-          headerBackground: () => <View style={styles.container} />,
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="explore" size={24} color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+      <NativeTabs.Trigger name="index">
+        <Label>Home</Label>
+        <Icon sf={'house.fill'} drawable="ic_menu_home" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="repositories">
+        <Label>Repositories</Label>
+        <Icon sf={'gear'} drawable="ic_menu_manage" />
+        {/* <Badge>9+</Badge> */}
+      </NativeTabs.Trigger>
+    </NativeTabs>
   );
 }
 
