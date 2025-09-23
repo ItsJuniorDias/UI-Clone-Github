@@ -12,7 +12,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useRef, useState, useEffect } from 'react';
 import { Card, Input } from '@/components';
 import { api } from '@/services/api';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 
 type ItemProps = {
   title: string;
